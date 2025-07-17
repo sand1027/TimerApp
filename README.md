@@ -1,113 +1,105 @@
-Timer App
+# Timer App
 
 A modern, responsive web application for creating and managing timers, with support for categories, history tracking, and light/dark mode theming. Built with React and Tailwind CSS, the app provides a clean and intuitive user interface for productivity and time management.
-Table of Contents
 
-Features
-Technologies Used
-Project Structure
-Installation
-Running the App
-Usage
-File and Data Storage
-Contributing
-License
+## Table of Contents
 
-Features
+* [Features](#features)
+* [Technologies Used](#technologies-used)
+* [Project Structure](#project-structure)
+* [Installation](#installation)
+* [Running the App](#running-the-app)
+* [Usage](#usage)
+* [File and Data Storage](#file-and-data-storage)
+* [Contributing](#contributing)
+* [License](#license)
 
-Timer Management: Create, start, pause, and reset timers with customizable names, durations, and categories.
-Category Support: Organize timers into categories with bulk actions (start, pause, reset) for all timers in a category.
-History Tracking: View a history of completed timers with timestamps.
-Light/Dark Mode: Toggle between light and dark themes for better accessibility and user experience.
-Responsive Design: Fully responsive layout that works on desktops, tablets, and mobile devices.
-Alerts and Modals: Receive notifications for timer completion and halfway alerts (optional).
-Export Functionality: Export timer history for record-keeping.
+## Features
 
-Technologies Used
-The Timer App is built using the following tools and technologies:
+* **Timer Management**: Create, start, pause, and reset timers with customizable names, durations, and categories.
+* **Category Support**: Organize timers into categories with bulk actions (start, pause, reset) for all timers in a category.
+* **History Tracking**: View a history of completed timers with timestamps.
+* **Light/Dark Mode**: Toggle between light and dark themes for better accessibility and user experience.
+* **Responsive Design**: Fully responsive layout that works on desktops, tablets, and mobile devices.
+* **Alerts and Modals**: Receive notifications for timer completion and halfway alerts (optional).
+* **Export Functionality**: Export timer history for record-keeping.
 
-React (v18.x): JavaScript library for building the user interface.
-Tailwind CSS (v3.x): Utility-first CSS framework for styling, with dark mode support.
-React Router (v6.x): For client-side routing to navigate between the main dashboard and history page.
-Lucide React: Icon library for expandable/collapsible category sections (ChevronUp/ChevronDown).
-Heroicons: SVG icons for buttons and labels, enhancing the UI.
-Vite: Build tool and development server for fast development and optimized builds.
-Node.js (v18.x or higher): JavaScript runtime for running the development server and managing dependencies.
-npm: Package manager for installing dependencies.
-Custom Hooks: useTimer, useCategories, and useTheme for managing state and logic.
-Utility Functions: getCategories and groupTimersByCategory for timer organization.
+## Technologies Used
 
-Project Structure
-The project is organized as follows:
+* **React (v18.x)**: JavaScript library for building the user interface.
+* **Tailwind CSS (v3.x)**: Utility-first CSS framework with dark mode support.
+* **React Router (v6.x)**: Client-side routing for navigating between views.
+* **Lucide React**: Icon library for expandable/collapsible sections.
+* **Heroicons**: SVG icons for buttons and UI elements.
+* **Vite**: Development server and build tool.
+* **Node.js (v18.x or higher)**: JavaScript runtime.
+* **npm**: Package manager.
+* **Custom Hooks**: `useTimer`, `useCategories`, `useTheme`.
+* **Utility Functions**: `getCategories`, `groupTimersByCategory`.
+
+## Project Structure
+
+```
 timer-app/
 ├── public/
-│   ├── index.html          # Main HTML file with React root
-│   └── favicon.ico         # App favicon
+│   ├── index.html
+│   └── favicon.ico
 ├── src/
 │   ├── components/
-│   │   ├── CategorySection.jsx  # Component for displaying timers grouped by category
-│   │   ├── HistoryList.jsx      # Component for displaying timer history
-│   │   ├── Modal.jsx            # Component for timer completion modal
-│   │   ├── TimerForm.jsx        # Component for adding new timers
-│   │   ├── TimerItem.jsx        # Component for individual timer display
-│   │   ├── ThemeToggle.jsx      # Component for toggling light/dark mode
+│   │   ├── CategorySection.jsx
+│   │   ├── HistoryList.jsx
+│   │   ├── Modal.jsx
+│   │   ├── TimerForm.jsx
+│   │   ├── TimerItem.jsx
+│   │   ├── ThemeToggle.jsx
 │   │   └── ui/
-│   │       ├── button.jsx       # Reusable Button component
-│   │       ├── input.jsx        # Reusable Input component
-│   │       ├── select.jsx       # Reusable Select component
-│   │       ├── label.jsx        # Reusable Label component
-│   │       ├── dialog.jsx       # Reusable Dialog component
-│   │       └── progress.jsx     # Reusable Progress bar component
+│   │       ├── button.jsx
+│   │       ├── input.jsx
+│   │       ├── select.jsx
+│   │       ├── label.jsx
+│   │       ├── dialog.jsx
+│   │       └── progress.jsx
 │   ├── hooks/
-│   │   ├── useTimer.js         # Hook for timer logic (start, pause, reset, etc.)
-│   │   ├── useCategories.js    # Hook for managing categories
-│   │   └── useTheme.js         # Hook for theme switching
+│   │   ├── useTimer.js
+│   │   ├── useCategories.js
+│   │   └── useTheme.js
 │   ├── utils/
-│   │   └── timerUtils.js       # Utility functions for timer categorization
-│   ├── App.jsx                 # Main app component with routing
-│   ├── Home.jsx                # Main dashboard component
-│   └── index.css               # Global CSS with Tailwind directives
-├── package.json                # Project dependencies and scripts
-├── tailwind.config.js          # Tailwind CSS configuration
-├── vite.config.js              # Vite configuration
-└── README.md                   # Project documentation
+│   │   └── timerUtils.js
+│   ├── App.jsx
+│   ├── Home.jsx
+│   └── index.css
+├── package.json
+├── tailwind.config.js
+├── vite.config.js
+└── README.md
+```
 
-File and Data Storage
+## Installation
 
-Timers: Managed in memory via the useTimer hook. Stored in the timers state as an array of objects with properties: id, name, duration, category, halfwayAlert, remaining, and status.
-Categories: Managed via the useCategories hook, stored in the categories state as an array of strings.
-History: Stored in the history state (via useTimer hook) as an array of completed timer objects with name and completionTime.
-Theme: Managed via the useTheme hook, stored in the theme state as "light" or "dark". Persisted using local storage or similar mechanism (implementation depends on useTheme).
-No Persistent Storage: The app currently stores data in memory (React state). For persistent storage, consider integrating with local storage or a backend API.
+### Prerequisites
 
-Installation
-Follow these steps to set up the Timer App locally:
-Prerequisites
+* Node.js v18.x or higher
+* npm (latest)
+* Git
 
-Node.js: Version 18.x or higher. Install from nodejs.org.
-npm: Comes with Node.js, but ensure it's updated (npm install -g npm).
-Git: For cloning the repository. Install from git-scm.com.
+### Steps
 
-Steps
+1. Clone the repository:
 
-Clone the Repository:
+```bash
 git clone https://github.com/your-username/timer-app.git
 cd timer-app
+```
 
+2. Install dependencies:
 
-Install Dependencies:
+```bash
 npm install
+```
 
-This installs all required packages, including:
+3. Ensure Tailwind CSS is configured in `tailwind.config.js`:
 
-react, react-dom
-react-router-dom
-tailwindcss, postcss, autoprefixer
-lucide-react
-vite
-
-
-Set Up Tailwind CSS:Ensure tailwind.config.js is configured with:
+```js
 module.exports = {
   darkMode: 'class',
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
@@ -116,109 +108,107 @@ module.exports = {
   },
   plugins: [],
 }
+```
 
-And src/index.css includes:
+4. Add Tailwind directives to `src/index.css`:
+
+```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+```
 
+5. Verify Vite setup in `vite.config.js`:
 
-Verify Vite Configuration:Ensure vite.config.js is set up for React:
+```js
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
 });
+```
 
+## Running the App
 
+### Start Development Server
 
-Running the App
-
-Start the Development Server:
+```bash
 npm run dev
+```
 
-This starts the Vite development server, typically at http://localhost:5173.
+Visit: [http://localhost:5173](http://localhost:5173)
 
-Build for Production:
+### Build for Production
+
+```bash
 npm run build
+```
 
-The production build is output to the dist/ folder.
+### Preview Production Build
 
-Preview the Production Build:
+```bash
 npm run preview
+```
 
+## Usage
 
+### Add a Timer
 
-Usage
+* Use the form to enter name, duration (seconds), category, and optional halfway alert.
+* Click **Add Timer**.
 
-Access the App:Open http://localhost:5173 in your browser after starting the development server.
+### Manage Categories
 
-Add a Timer:
+* Add new categories via the form.
+* Filter timers by category using the dropdown.
 
-On the left side of the dashboard, use the "Add New Timer" form.
-Enter a timer name, duration (in seconds), select a category, and optionally enable a halfway alert.
-Click "Add Timer" to create the timer.
+### Control Timers
 
+* Start, pause, or reset timers individually.
+* Use bulk actions per category.
 
-Manage Categories:
+### View History
 
-On the right side, use the "Add New Category" form to create a new category.
-Use the "Filter by Category" dropdown to view timers for a specific category or all categories.
+* Click **View History** to view completed timers.
+* Export timer history (if implemented).
 
+### Toggle Theme
 
-Control Timers:
+* Click the theme toggle button to switch light/dark modes.
 
-Each timer displays in its category section with "Start," "Pause," and "Reset" buttons.
-Use bulk actions ("Start All," "Pause All," "Reset All") in each category section.
+## File and Data Storage
 
+### State Management
 
-View History:
+* `useTimer`: Manages timers and provides all control functions.
+* `useCategories`: Manages category list.
+* `useTheme`: Toggles light/dark mode.
 
-Click "View History" to see completed timers with timestamps.
-Export history using the "Export History" button (implementation depends on onExport).
+### Temporary Storage
 
+* Data is stored in memory during session.
+* Reloading the page resets state.
 
-Toggle Theme:
+### Persistence (Future)
 
-Use the theme toggle button in the top-right corner to switch between light and dark modes.
+* To persist data:
 
-
-
-File and Data Storage Details
-
-State Management:
-
-useTimer: Manages timers (timers, alerts, modal states) and provides functions like addTimer, startTimer, pauseTimer, etc.
-useCategories: Manages the list of categories and provides addCategory.
-useTheme: Manages the theme state and provides toggleTheme.
-
-
-Temporary Storage:
-
-All data (timers, categories, history) is stored in memory during the session.
-Reloading the page resets the state unless persisted (e.g., via local storage or a backend).
-
-
-Future Persistence:
-
-To persist data, consider adding local storage in the useTimer and useCategories hooks:localStorage.setItem('timers', JSON.stringify(timers));
+```js
+localStorage.setItem('timers', JSON.stringify(timers));
 localStorage.setItem('categories', JSON.stringify(categories));
+```
+
+* Or integrate with a backend via API (e.g., `fetch`, `axios`).
+
+## Contributing
+
+1. Fork the repo
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit: `git commit -m "Add your feature"`
+4. Push: `git push origin feature/your-feature`
+5. Open a pull request with description
+
+Ensure code matches ESLint/Prettier configuration (if set).
 
 
-For a backend, integrate with an API (e.g., via fetch or axios) to store data in a database.
-
-
-
-Contributing
-Contributions are welcome! To contribute:
-
-Fork the repository.
-Create a new branch (git checkout -b feature/your-feature).
-Make changes and commit (git commit -m "Add your feature").
-Push to your branch (git push origin feature/your-feature).
-Open a pull request with a detailed description of your changes.
-
-Please ensure code follows the project's ESLint and Prettier configurations (if set up).
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
