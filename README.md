@@ -121,12 +121,36 @@ module.exports = {
 5. Verify Vite setup in `vite.config.js`:
 
 ```js
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+import path from "path";
 
+// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [tailwindcss(), react()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+    },
+  },
 });
+
+```
+
+6. Add `jsconfig.json`:
+
+```js
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "@/*": ["./*"]
+    }
+  }
+}
+
+
 ```
 
 ## Running the App
